@@ -194,7 +194,7 @@ class SymfonySession implements TokenStorageInterface
     }
 
     /**
-     * @return Session
+     * @return SessionInterface
      */
     public function getSession()
     {

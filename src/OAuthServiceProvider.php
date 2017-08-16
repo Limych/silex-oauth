@@ -9,7 +9,6 @@ use Gigablah\Silex\OAuth\EventListener\UserInfoListener;
 use Gigablah\Silex\OAuth\EventListener\UserProviderListener;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
-use Silex\Application;
 use Silex\Api\EventListenerProviderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use OAuth\ServiceFactory;

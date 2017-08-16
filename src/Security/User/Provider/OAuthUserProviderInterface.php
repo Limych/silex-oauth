@@ -3,6 +3,7 @@
 namespace Gigablah\Silex\OAuth\Security\User\Provider;
 
 use Gigablah\Silex\OAuth\Security\Authentication\Token\OAuthTokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * OAuth user provider interface.

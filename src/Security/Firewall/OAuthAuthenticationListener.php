@@ -6,8 +6,6 @@ use Gigablah\Silex\OAuth\OAuthServiceRegistry;
 use Gigablah\Silex\OAuth\OAuthEvents;
 use Gigablah\Silex\OAuth\Event\FilterTokenEvent;
 use Gigablah\Silex\OAuth\Security\Authentication\Token\OAuthToken;
-use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderAdapter;
-use Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
@@ -24,7 +22,6 @@ use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 use OAuth\Common\Exception\Exception as OAuthException;
-use OAuth\Common\Service\ServiceInterface as OAuthServiceInterface;
 use OAuth\OAuth1\Service\ServiceInterface as OAuth1ServiceInterface;
 
 /**
@@ -57,9 +54,7 @@ class OAuthAuthenticationListener extends AbstractAuthenticationListener
      */
     public function __construct(TokenStorageInterface $tokenStorage, AuthenticationManagerInterface $authenticationManager, SessionAuthenticationStrategyInterface $sessionStrategy, HttpUtils $httpUtils, $providerKey, OAuthServiceRegistry $registry, AuthenticationSuccessHandlerInterface $successHandler = null, AuthenticationFailureHandlerInterface $failureHandler = null, array $options = array(), LoggerInterface $logger = null, EventDispatcherInterface $dispatcher = null, $csrfTokenManager = null)
     {
-        if ($csrfTokenManager instanceof CsrfProviderInterface) {
-            $csrfTokenManager = new CsrfProviderAdapter($csrfTokenManager);
-        } elseif (null !== $csrfTokenManager && !$csrfTokenManager instanceof CsrfTokenManagerInterface) {
+        if (null !== $csrfTokenManager && !$csrfTokenManager instanceof CsrfTokenManagerInterface) {
             throw new InvalidArgumentException('The CSRF token manager should be an instance of CsrfProviderInterface or CsrfTokenManagerInterface.');
         }
 
